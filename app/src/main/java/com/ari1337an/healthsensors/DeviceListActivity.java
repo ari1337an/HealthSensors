@@ -67,11 +67,7 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
      */
     @RequiresApi(api = Build.VERSION_CODES.S)
     private void startNearbyBluetoothDeviceDiscovery(){
-        int REQUEST_PERMISSION_BLUETOOTH_SCAN = 254;
-        int REQUEST_PERMISSION_BLUETOOTH_CONNECT = 250;
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_ACCESS_FINE_LOCATION);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_ADMIN}, 1);
     }
 
     public void goBackToMainActivity(String messageForToast) {
@@ -129,6 +125,10 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         filter.addAction(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
+
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH}, 1);
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_ADMIN}, 2);
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, 3);
 
         // Activity Context
         mContext = this;
