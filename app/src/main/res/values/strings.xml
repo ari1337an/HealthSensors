@@ -11,4 +11,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="device_name">device name</string>
+    <string name="mac_address">Mac Address</string>
+    <string name="device_logo">Device Logo</string>
+    <string name="nearby_devices_list">Nearby Devices List</string>
 </resources>
