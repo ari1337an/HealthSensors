@@ -14,4 +14,6 @@
     <string name="mac_address">Mac Address</string>
     <string name="device_logo">Device Logo</string>
     <string name="nearby_devices_list">Nearby Devices List</string>
+    <string name="connected_to_module">Connected to module!</string>
+    <string name="send_data">Send Data</string>
 </resources>

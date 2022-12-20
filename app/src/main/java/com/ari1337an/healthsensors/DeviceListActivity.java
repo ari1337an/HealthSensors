@@ -37,7 +37,7 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
     BluetoothManager bluetoothManager;
     BluetoothAdapter bluetoothAdapter;
     RecyclerView deviceListRV;
-    ArrayList<Device> foundDevices = new ArrayList<>();
+    ArrayList<BluetoothDevice> foundDevices = new ArrayList<>();
     ProgressBar loaderDiscovery;
     Context mContext;
     public static Handler handler;
@@ -93,22 +93,23 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
-                // Get the Data
-                @SuppressLint("MissingPermission") String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-
-                if(deviceName == null) return;
-
-                // Notify the User
-                Toast.makeText(context, "Found a device nearby! " + deviceName, Toast.LENGTH_SHORT).show();
-
-                // Parse the Data
-                Device newDevice = new Device();
-                newDevice.devicename = deviceName;
-                newDevice.macaddress = deviceHardwareAddress;
+//                // Get the Data
+//                @SuppressLint("MissingPermission") String deviceName = device.getName();
+//                String deviceHardwareAddress = device.getAddress(); // MAC address
+//
+//                if(deviceName == null) return;
+//
+//                // Notify the User
+//                Toast.makeText(context, "Found a device nearby! " + deviceName, Toast.LENGTH_SHORT).show();
+//
+//                // Parse the Data
+//                Device newDevice = new Device();
+//                newDevice.devicename = deviceName;
+//                newDevice.macaddress = deviceHardwareAddress;
 
                 // Add to List
-                foundDevices.add(newDevice);
+//                foundDevices.add(newDevice);
+                foundDevices.add(device);
             }
         }
     };
@@ -152,10 +153,12 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
                     case CONNECTING_STATUS:
                         switch(msg.arg1){
                             case 1:
-                                Log.d("CSE323", "msg1");
+                                Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
+                                Intent takeToConnectedPage = new Intent(mContext, DataViewActivity.class);
+                                startActivity(takeToConnectedPage);
                                 break;
                             case -1:
-                                Log.d("CSE323", "msg2");
+                                Toast.makeText(mContext, "Socket is not open on that device!", Toast.LENGTH_SHORT).show();
                                 break;
                         }
                         break;
@@ -212,11 +215,13 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
     }
 
     @Override
-    public void onClickedItem(Device d) {
-        Log.d("CSE323", "clicked on: " + d.macaddress);
+    public void onClickedItem(BluetoothDevice d) {
+        Log.d("CSE323", "clicked on: " + d.getAddress());
 
-        ConnectThread connectThread = new ConnectThread(bluetoothAdapter, d.macaddress, mContext, handler);
-        connectThread.start();
+        // Create a bluetooth service to connect
+
+        BluetoothService bluetoothService = new BluetoothService(this, handler);
+        bluetoothService.connect(d);
     }
 
     @Override
