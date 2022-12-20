@@ -1,5 +1,9 @@
 package com.ari1337an.healthsensors;
 
+import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class DeviceListRVAdapter extends RecyclerView.Adapter<DeviceListRVAdapter.DeviceListViewHolder> {
 
-    ArrayList<Device> dataset;
+    ArrayList<BluetoothDevice> dataset;
     ItemsClicked itemsClicked;
 
-    DeviceListRVAdapter(ArrayList<Device> datasetList, ItemsClicked ic){
+    DeviceListRVAdapter(ArrayList<BluetoothDevice> datasetList, ItemsClicked ic) {
         dataset = datasetList;
         itemsClicked = ic;
     }
@@ -34,7 +39,10 @@ public class DeviceListRVAdapter extends RecyclerView.Adapter<DeviceListRVAdapte
         public TextView getDeviceName() {
             return deviceName;
         }
-        public TextView getMacAddress() { return macAddress; }
+
+        public TextView getMacAddress() {
+            return macAddress;
+        }
     }
 
     @NonNull
@@ -53,8 +61,10 @@ public class DeviceListRVAdapter extends RecyclerView.Adapter<DeviceListRVAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DeviceListViewHolder holder, int position) {
-        holder.getDeviceName().setText(dataset.get(position).devicename);
-        holder.getMacAddress().setText(dataset.get(position).macaddress);
+        @SuppressLint("MissingPermission") String deviceName = dataset.get(position).getName();
+        String deviceHardwareAddress = dataset.get(position).getAddress();
+        holder.getDeviceName().setText(deviceName);
+        holder.getMacAddress().setText(deviceHardwareAddress);
     }
 
     @Override
@@ -65,5 +75,5 @@ public class DeviceListRVAdapter extends RecyclerView.Adapter<DeviceListRVAdapte
 }
 
 interface ItemsClicked {
-    void onClickedItem(Device d);
+    void onClickedItem(BluetoothDevice d);
 }

@@ -5,16 +5,21 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,41 +27,95 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     AlertDialog alertDialog;
-
-    ActivityResultLauncher<String[]> permissionsLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
-        result -> {
-
-        }
-    );
+    int permissionsCount = 0;
+    ArrayList<String> permissionsList;
+    ActivityResultLauncher<String[]> permissionsLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<String> permissionsList = new ArrayList<>();
-        permissionsList.add(Manifest.permission.BLUETOOTH);
-        permissionsList.add(Manifest.permission.BLUETOOTH_ADMIN);
-        permissionsList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        permissionsList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissionsList = new ArrayList<>();
+        String[] permissionsStr;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            permissionsList.add(Manifest.permission.BLUETOOTH_SCAN);
-            permissionsList.add(Manifest.permission.BLUETOOTH_CONNECT);
-            permissionsList.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            permissionsStr = new String[]{
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.BLUETOOTH_SCAN,
+                    Manifest.permission.BLUETOOTH_CONNECT,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            };
+        }else{
+            permissionsStr = new String[]{
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            };
         }
-        askForPermissions(permissionsList);
+        permissionsLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+        new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String,Boolean> result) {
+                ArrayList<Boolean> list = new ArrayList<>(result.values());
+                permissionsList = new ArrayList<>();
+
+
+                String[] permissionsStr;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                    permissionsStr = new String[]{
+                            Manifest.permission.BLUETOOTH,
+                            Manifest.permission.BLUETOOTH_ADMIN,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.BLUETOOTH_SCAN,
+                            Manifest.permission.BLUETOOTH_CONNECT,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    };
+                }else{
+                    permissionsStr = new String[]{
+                            Manifest.permission.BLUETOOTH,
+                            Manifest.permission.BLUETOOTH_ADMIN,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    };
+                }
+
+
+                int permissionsCount = 0;
+                for (int i = 0; i < list.size(); i++) {
+                    if (shouldShowRequestPermissionRationale(permissionsStr[i])) {
+                        permissionsList.add(permissionsStr[i]);
+                    }else if (!hasPermission(MainActivity.this, permissionsStr[i])){
+                        permissionsCount++;
+                    }
+                }
+                if (permissionsList.size() > 0) {
+                    //Some permissions are denied and can be asked again.
+                    askForPermissions(permissionsStr);
+                } else if (permissionsCount > 0) {
+                    //Show alert dialog
+                    showPermissionDialog();
+                } else {
+                    //All permissions granted. Do your stuff 🤞
+                }
+            }
+        });
+
+        askForPermissions(permissionsStr);
 
     }
 
-    private void askForPermissions(ArrayList<String> permissionsList) {
-        String[] newPermissionStr = new String[permissionsList.size()];
-        for (int i = 0; i < newPermissionStr.length; i++) {
-            newPermissionStr[i] = permissionsList.get(i);
-        }
-        if (newPermissionStr.length > 0) {
-            permissionsLauncher.launch(newPermissionStr);
-        } else {
-            showPermissionDialog();
+    private boolean hasPermission(Context context, String permissionStr) {
+        return ContextCompat.checkSelfPermission(context, permissionStr) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void askForPermissions(String[] permissionsList) {
+        if (permissionsList.length > 0) {
+            permissionsLauncher.launch(permissionsList);
         }
     }
 
