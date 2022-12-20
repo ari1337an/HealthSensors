@@ -3,6 +3,7 @@ package com.ari1337an.healthsensors;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 public class DataViewActivity extends AppCompatActivity {
@@ -15,5 +16,12 @@ public class DataViewActivity extends AppCompatActivity {
 
     public void sendDataToDevice(View view) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BluetoothService currentService = BluetoothService.getInstance(this, new Handler());
+        currentService.closeAll();
     }
 }

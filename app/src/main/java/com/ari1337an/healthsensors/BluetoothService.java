@@ -32,6 +32,9 @@ public class BluetoothService {
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
 
+    @SuppressLint("StaticFieldLeak")
+    private static volatile BluetoothService INSTANCE = null;
+
     private static final UUID BLUETOOTH_SPP = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Constants
@@ -42,8 +45,16 @@ public class BluetoothService {
         public static final int MESSAGE_READ = 0;
         public static final int MESSAGE_WRITE = 1;
         public static final int MESSAGE_TOAST = 2;
+        public static final int CONNECTED = 3;
+        public static final int CONNECTION_FAILED = 4;
+        public static final int DISCONNECTED = 5;
 
         // ... (Add other message types here as needed.)
+    }
+
+    public void closeAll(){
+        mConnectedThread.cancel();
+        mConnectThread.cancel();
     }
 
     public void write(byte[] out) {
@@ -58,11 +69,22 @@ public class BluetoothService {
         r.write(out);
     }
 
-    public BluetoothService(Context context, Handler handler){
+    private BluetoothService(Context context, Handler handler){
         mHandler = handler;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mContext = context;
         mState = STATE_NOT_CONNECTED;
+    }
+
+    public static BluetoothService getInstance(Context context, Handler handler){
+        if(INSTANCE == null){
+            synchronized (BluetoothService.class){
+                if(INSTANCE == null){
+                    INSTANCE = new BluetoothService(context, handler);
+                }
+            }
+        }
+        return INSTANCE;
     }
 
     public synchronized void connect(BluetoothDevice device){
@@ -86,29 +108,8 @@ public class BluetoothService {
             bluetoothAdapter = ba;
             mContext = context;
             handler = h;
-            UUID uuid = null;
-
             Log.d("CSE323", "Trying to connect to: " + d.getName());
-
             try {
-                BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-                Method getUuidsMethod = BluetoothAdapter.class.getDeclaredMethod("getUuids", null);
-                ParcelUuid[] uuids = (ParcelUuid[]) getUuidsMethod.invoke(adapter, null);
-
-                Log.d("CSE323", "Total uuids: " + uuids.length);
-                if (uuids != null) {
-                    uuid = uuids[1].getUuid();
-                    Log.d("CSE323", "UUID: " + uuid.toString());
-                } else {
-                    Toast.makeText(mContext, "UUIDs not found, be sure to enable bluetooth!", Toast.LENGTH_SHORT).show();
-                }
-
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-
-            try {
-//                mSocket = d.createInsecureRfcommSocketToServiceRecord(uuid);
                 mSocket = d.createInsecureRfcommSocketToServiceRecord(BLUETOOTH_SPP);
             } catch (Exception e) {
                 Log.e("CSE323", "Socket's create() method failed", e);
@@ -117,21 +118,16 @@ public class BluetoothService {
 
         @SuppressLint("MissingPermission")
         public void run() {
-
-            Log.d("CSE323", "Running connection on separate thread!");
-
             bluetoothAdapter.cancelDiscovery();
             try {
                 mSocket.connect();
-                Log.d("Status", "Device connected");
                 mState = STATE_CONNECTED;
-                handler.obtainMessage(CONNECTING_STATUS, 1, -1).sendToTarget();
+                handler.obtainMessage(MessageConstants.CONNECTED, 1).sendToTarget();
             } catch (IOException connectException) {
                 connectException.printStackTrace();
                 try {
                     mSocket.close();
-                    Log.e("Status", "Cannot connect to device");
-                    handler.obtainMessage(CONNECTING_STATUS, -1, -1).sendToTarget();
+                    handler.obtainMessage(MessageConstants.CONNECTION_FAILED, 1).sendToTarget();
                 } catch (IOException closeException) {
                     Log.e("CSE323", "Could not close the client socket", closeException);
                 }
@@ -150,10 +146,7 @@ public class BluetoothService {
                 Log.e("CSE323", "Could not close the client socket", e);
             }
         }
-
-
     }
-
 
 
     private class ConnectedThread extends Thread {
@@ -194,33 +187,27 @@ public class BluetoothService {
             byte[] dataB = data.getBytes();
             write(dataB);
 
+            String line = "";
+
             // Keep listening to the InputStream until an exception occurs.
             while (true) {
                 try {
-
-//                    synchronized (this){
-//                        try{
-//                            wait(5000);
-//                        }catch (InterruptedException e){
-//                            e.printStackTrace();
-//                        }
-//                    }
-
-                    Log.d("CSE323", "Waiting for InputStream from Bluetooth Device...");
-                    // Read from the InputStream.
                     numBytes = mmInStream.read(mmBuffer);
-                    // Send the obtained bytes to the UI activity.
-//                    Message readMsg = mHandler.obtainMessage(
-//                            MessageConstants.MESSAGE_READ, numBytes, -1,
-//                            mmBuffer);
-//                    readMsg.sendToTarget();
                     byte[] byteGot = Arrays.copyOf(mmBuffer, numBytes);
                     String stringGot = new String(byteGot, StandardCharsets.UTF_8);
-
-                    Log.d("CSE323", "Received : " + String.valueOf(numBytes) + "Byte(s)");
-                    Log.d("CSE323", "Data is : " + stringGot);
+                    if(stringGot.charAt(0) == 'C'){
+                        String[] words = line.split(" ");
+                        if(words.length == 8){ // check that the input stream we got was not partial
+                            Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
+                            readMsg.sendToTarget();
+                        }
+                        line = "";
+                    }else{
+                        line = line + stringGot;
+                    }
                 } catch (IOException e) {
-                    Log.d("CSE323", "Input stream was disconnected", e);
+                    Message readMsg = mHandler.obtainMessage(MessageConstants.DISCONNECTED, 1);
+                    readMsg.sendToTarget();
                     break;
                 }
             }

@@ -67,7 +67,11 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
      */
     @RequiresApi(api = Build.VERSION_CODES.S)
     private void startNearbyBluetoothDeviceDiscovery(){
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_ACCESS_FINE_LOCATION);
+        if(Build.VERSION.SDK_INT >= 31){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_PERMISSION_ACCESS_FINE_LOCATION);
+        }else{
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_ACCESS_FINE_LOCATION);
+        }
     }
 
     public void goBackToMainActivity(String messageForToast) {
@@ -154,8 +158,8 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
                         switch(msg.arg1){
                             case 1:
                                 Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
-                                Intent takeToConnectedPage = new Intent(mContext, DataViewActivity.class);
-                                startActivity(takeToConnectedPage);
+//                                Intent takeToConnectedPage = new Intent(mContext, DataScreen.class);
+//                                startActivity(takeToConnectedPage);
                                 break;
                             case -1:
                                 Toast.makeText(mContext, "Socket is not open on that device!", Toast.LENGTH_SHORT).show();
@@ -220,8 +224,12 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
 
         // Create a bluetooth service to connect
 
-        BluetoothService bluetoothService = new BluetoothService(this, handler);
-        bluetoothService.connect(d);
+        Intent takeToConnectedPage = new Intent(mContext, DataScreen.class);
+        takeToConnectedPage.putExtra("macaddress", d.getAddress());
+        startActivity(takeToConnectedPage);
+
+//        BluetoothService bluetoothService = BluetoothService.getInstance(this, handler);
+//        bluetoothService.connect(d);
     }
 
     @Override
