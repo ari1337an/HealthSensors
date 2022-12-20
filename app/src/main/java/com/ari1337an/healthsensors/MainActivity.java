@@ -78,5 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void connectBtnClick(View view) {
         Intent takeToDeviceList = (Intent) new Intent(this, DeviceListActivity.class);
         startActivity(takeToDeviceList);
+
     }
 }
