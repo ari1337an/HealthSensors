@@ -65,7 +65,8 @@ public class DataScreen extends AppCompatActivity {
                     double oxygen = (Double.parseDouble(splitted[3]));
                     double heart = (Double.parseDouble(splitted[1]));
 
-                    Utils.storeData(temperature, humidity, oxygen, heart);
+                    Utils.storeAllData(temperature, humidity, oxygen, heart, getApplicationContext());
+//                    Utils.readData(getApplicationContext());
 
                     tempVal.setText(Math.round(Double.parseDouble(splitted[7])) + "°");
                     humidVal.setText(Math.round((Double.parseDouble(splitted[5]))) + "");
