@@ -203,6 +203,9 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
         result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 Toast.makeText(this, "Thanks for enabling bluetooth!", Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }else if(result.getResultCode() == Activity.RESULT_CANCELED){
                 goBackToMainActivity("You need to enable bluetooth!");
             }else{

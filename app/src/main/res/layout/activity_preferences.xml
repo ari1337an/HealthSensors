@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item1indexVal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Preferences"
+        >
+
+        <TextView
+            android:id="@+id/item3IndexText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="45dp"
+            android:text="Item3 Index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item2SufText" />
+
+        <TextView
+            android:id="@+id/item4IndexText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:text="Item4 Index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item3SufText" />
+
+        <TextView
+        android:id="@+id/item1SufText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Item1 Suf"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item1DescText" />
+
+        <EditText
+        android:id="@+id/item1SufInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="13"
+        android:hint="Item1 Number Suffix"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toEndOf="@+id/item1NameText"
+        app:layout_constraintTop_toBottomOf="@+id/item1DescInput" />
+
+        <TextView
+        android:id="@+id/item1DescText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="47dp"
+        android:text="Item1 Desc"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item1NameText" />
+
+        <EditText
+        android:id="@+id/item1DescInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="13"
+        android:hint="Item1 Description"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toEndOf="@+id/item1NameText"
+        app:layout_constraintTop_toBottomOf="@+id/item1NameInput" />
+
+        <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/item1_index"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+
+    <Spinner
+        android:id="@+id/item1Index2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:autofillHints="Item1 index"
+        android:elevation="2dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+
+    <TextView
+        android:id="@+id/item1NameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/item1_name"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item1IndexText" />
+
+        <TextView
+        android:id="@+id/preferenceTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/preferences"
+        android:textAlignment="center"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item1IndexText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/item1_index"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+
+    <Spinner
+        android:id="@+id/item1IndexDropdown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
+        android:elevation="2dp"
+        android:autofillHints="Item1 index"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+
+        <Spinner
+            android:id="@+id/item2IndexDropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="Item1 index"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+            app:layout_constraintTop_toBottomOf="@+id/item1SufInput" />
+
+        <Spinner
+            android:id="@+id/item3IndexDropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="Item1 index"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+            app:layout_constraintTop_toBottomOf="@+id/item2SufInput" />
+
+        <Spinner
+            android:id="@+id/item4IndexDropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="Item1 index"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+            app:layout_constraintTop_toBottomOf="@+id/item3SufInput" />
+
+        <TextView
+            android:id="@+id/item2SufText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="47dp"
+            android:text="Item2 Suf"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item2DescText" />
+
+        <TextView
+            android:id="@+id/item3SufText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="47dp"
+            android:text="Item3 Suf"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item3DescText" />
+
+        <TextView
+            android:id="@+id/item4SufText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="45dp"
+            android:text="Item4 Suf"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item4DescText" />
+
+        <EditText
+            android:id="@+id/item2SufInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item2 Number Suffix"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item2DescInput" />
+
+        <EditText
+            android:id="@+id/item3SufInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item3 Number Suffix"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item3DescInput" />
+
+        <EditText
+            android:id="@+id/item4SufInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="100dp"
+            android:ems="13"
+            android:hint="Item4 Number Suffix"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item4DescInput" />
+
+        <EditText
+            android:id="@+id/item2NameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item2 Name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item2IndexDropdown" />
+
+        <EditText
+            android:id="@+id/item3NameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item3 Name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item3IndexDropdown" />
+
+        <EditText
+            android:id="@+id/item4NameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item4 Name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item4IndexDropdown" />
+
+        <TextView
+            android:id="@+id/item2DescText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="Item2 Desc"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item2NameText" />
+
+        <TextView
+            android:id="@+id/item3DescText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="47dp"
+            android:text="Item3 Desc"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item3NameText" />
+
+        <TextView
+            android:id="@+id/item4DescText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="45dp"
+            android:text="Item4 Desc"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item4NameText" />
+
+        <TextView
+            android:id="@+id/item2NameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="Item2 Name"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item2IndexText" />
+
+        <TextView
+            android:id="@+id/item3NameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="Item3 Name"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item3IndexText" />
+
+        <TextView
+            android:id="@+id/item4NameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:text="Item4 Name"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item4IndexText" />
+
+        <TextView
+            android:id="@+id/item2IndexText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="Item2 Index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />
+
+        <TextView
+            android:id="@+id/item2IndexText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="Item2 Index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />
+
+        <EditText
+            android:id="@+id/item2DescInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item2 Description"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item2NameInput" />
+
+        <EditText
+            android:id="@+id/item3DescInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item3 Description"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item3NameInput" />
+
+        <EditText
+            android:id="@+id/item4DescInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="13"
+            android:hint="Item4 Description"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item4NameInput" />
+
+        <EditText
+        android:id="@+id/item1NameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:ems="13"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="Item1 Name"
+        app:layout_constraintStart_toEndOf="@+id/item1NameText"
+        app:layout_constraintTop_toBottomOf="@+id/item1IndexDropdown"/>
+
+        <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Save"
+        android:onClick="savePreference"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Reset"
+            android:onClick="resetSharedPref"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

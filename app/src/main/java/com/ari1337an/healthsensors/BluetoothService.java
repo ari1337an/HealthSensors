@@ -55,6 +55,7 @@ public class BluetoothService {
     public void closeAll(){
         mConnectedThread.cancel();
         mConnectThread.cancel();
+        BluetoothService.INSTANCE = null;
     }
 
     public void write(byte[] out) {

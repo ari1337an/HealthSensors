@@ -29,14 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:text="connect your "
+            android:text="Connect Your "
             android:textAlignment="center"
             android:textSize="28sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hc05"
+            android:text="HC-05"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/textColor"
@@ -46,11 +46,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" module"
+            android:text="Module"
             android:textAlignment="center"
             android:textSize="28sp" />
 
     </LinearLayout>
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/preferencesBtn"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="Preferences"
+        android:onClick="prefrencesBtnClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connectBtn" />
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/connectBtn"

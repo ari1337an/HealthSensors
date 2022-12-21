@@ -24,7 +24,7 @@ public class ViewLogScreen extends AppCompatActivity {
 
     List<String> lines;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,9 @@ public class ViewLogScreen extends AppCompatActivity {
 
         Intent currentIntent = getIntent();
         String dataType = currentIntent.getStringExtra("datatype");
+        String itemName = currentIntent.getStringExtra("itemNo");
         data = Utils.readData(getApplicationContext(), dataType);
-        logHeader.setText(dataType.toUpperCase() + " logs");
+        logHeader.setText(itemName.toUpperCase() + " logs");
         logView.setText(data);
 
 

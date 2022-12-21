@@ -14,6 +14,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    private UserSettings settings;
+
     AlertDialog alertDialog;
     int permissionsCount = 0;
     ArrayList<String> permissionsList;
@@ -35,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settings = (UserSettings) getApplication();
+        settings.loadAllSharedPreferences();
 
         permissionsList = new ArrayList<>();
         String[] permissionsStr;
@@ -109,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    private void loadSharedPreferences() {
+//        SharedPreferences sharedPreferences = getSharedPreferences(UserSettings.PREFERENCES, MODE_PRIVATE);
+//        String item1Index = sharedPreferences.getString(UserSettings.ITEM1_INDEX, String.valueOf(1));
+//        settings.setItem1Index(item1Index);
+//    }
+
     private boolean hasPermission(Context context, String permissionStr) {
         return ContextCompat.checkSelfPermission(context, permissionStr) == PackageManager.PERMISSION_GRANTED;
     }
@@ -138,5 +151,10 @@ public class MainActivity extends AppCompatActivity {
         Intent takeToDeviceList = (Intent) new Intent(this, DeviceListActivity.class);
         startActivity(takeToDeviceList);
 
+    }
+
+    public void prefrencesBtnClick(View view) {
+        Intent takeToPreferences = (Intent) new Intent(this, Preferences.class);
+        startActivity(takeToPreferences);
     }
 }

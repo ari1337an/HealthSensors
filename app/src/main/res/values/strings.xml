@@ -16,4 +16,7 @@
     <string name="nearby_devices_list">Nearby Devices List</string>
     <string name="connected_to_module">Connected to module!</string>
     <string name="send_data">Send Data</string>
+    <string name="preferences">Preferences</string>
+    <string name="item1_index">Item1 Index</string>
+    <string name="item1_name">Item1 Name</string>
 </resources>

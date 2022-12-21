@@ -17,13 +17,13 @@ public class Utils {
     private static final String TAG = "Utils";
     public static void storeAllData (double temperature, double humidity, double oxygen, double heart, Context context){
         Log.d(TAG, "storeData: " + temperature + " " + humidity + " " + oxygen + " " + heart);
-        storeData(temperature, context, DataTypes.temperature);
-        storeData(humidity, context, DataTypes.humidity);
-        storeData(oxygen, context, DataTypes.oxygen);
-        storeData(heart, context, DataTypes.heart);
+        storeData(temperature, context, "Item1");
+        storeData(humidity, context, "Item2");
+        storeData(oxygen, context, "Item3");
+        storeData(heart, context, "Item4");
     }
 
-    public static void storeData(double value, Context context, DataTypes dataType){
+    public static void storeData(double value, Context context, String dataType){
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(dataType+".txt", Context.MODE_APPEND));
             outputStreamWriter.append(String.valueOf(LocalDateTime.now())).append(" => ").append(String.valueOf(value)).append("\n");
