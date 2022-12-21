@@ -22,7 +22,7 @@ public class ViewLogScreen extends AppCompatActivity {
     TextView logView;
     TextView logHeader;
 
-//    List<String> lines;
+    List<String> lines;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,11 +40,21 @@ public class ViewLogScreen extends AppCompatActivity {
         logView.setText(data);
 
 
-//        lines = Arrays.asList(data.split("\n"));
+        lines = Arrays.asList(data.split("\n"));
 
-//        for(String line: lines){
-//            List<String> date = Arrays.asList(line.split(" : "));
-//        }
+//        Log.d(TAG, "onCreate: " + lines.toString());
+        for(String line: lines){
+//            Log.d(TAG, "onCreate: " + line.toString());
+            String [] date = line.split(" => ");
+//            if(date.length < 2) Log.d(TAG, "onCreate: " + date.length + " " + date[0]);
+//            for(String val: date){
+//                Log.d(TAG, "onCreate: "+  val);
+//            }
+//            Log.d(TAG, "onCreate: size " + date[1]);
+
+
+
+        }
 
     }
 }
