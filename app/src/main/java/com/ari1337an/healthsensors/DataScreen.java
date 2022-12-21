@@ -22,6 +22,12 @@ public class DataScreen extends AppCompatActivity {
     private Handler handler;
     private Context mContext;
 
+
+//    double temperature = 0;
+//    double humidity = 0;
+//    double oxygen = 0;
+//    double heart = 0;
+
     private interface MessageConstants {
         public static final int MESSAGE_READ = 0;
         public static final int MESSAGE_WRITE = 1;
@@ -45,25 +51,33 @@ public class DataScreen extends AppCompatActivity {
         TextView oxyVal = findViewById(R.id.oxygen_value);
         TextView heartVal = findViewById(R.id.heart_value);
 
+
         handler = new Handler(Looper.getMainLooper()) {
             @SuppressLint("SetTextI18n")
             @Override
-            public void handleMessage(Message msg){
+            public void handleMessage(Message msg) {
                 if (msg.what == MessageConstants.MESSAGE_READ) {
                     Log.d("CSE323", String.valueOf(msg.obj));
                     String[] splitted = String.valueOf(msg.obj).split(" ");
 
+                    double temperature = (Double.parseDouble(splitted[7]));
+                    double humidity = (Double.parseDouble(splitted[5]));
+                    double oxygen = (Double.parseDouble(splitted[3]));
+                    double heart = (Double.parseDouble(splitted[1]));
 
-                    tempVal.setText(splitted[7]+"°");
-                    humidVal.setText(splitted[5]);
-                    oxyVal.setText(splitted[3]);
-                    heartVal.setText(splitted[1]);
+                    Utils.storeData(temperature, humidity, oxygen, heart);
+//                    Log.d("CSE323", "handleMessage: " + splitted);
 
-                }else if(msg.what == MessageConstants.CONNECTED) {
+                    tempVal.setText(Math.round(Double.parseDouble(splitted[7])) + "°");
+                    humidVal.setText(Math.round((Double.parseDouble(splitted[5]))) + "");
+                    oxyVal.setText(Math.round((Double.parseDouble(splitted[3]))) + "");
+                    heartVal.setText(Math.round((Double.parseDouble(splitted[1]))) + "");
+
+                } else if (msg.what == MessageConstants.CONNECTED) {
                     Toast.makeText(mContext, "Connected to Device", Toast.LENGTH_SHORT).show();
-                }else if(msg.what == MessageConstants.CONNECTION_FAILED){
+                } else if (msg.what == MessageConstants.CONNECTION_FAILED) {
                     Toast.makeText(mContext, "Target Device doesn't have Socket Open!", Toast.LENGTH_SHORT).show();
-                }else if(msg.what == MessageConstants.DISCONNECTED){
+                } else if (msg.what == MessageConstants.DISCONNECTED) {
                     Toast.makeText(mContext, "Disconnected!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
