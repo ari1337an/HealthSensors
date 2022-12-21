@@ -12,15 +12,49 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class DataScreen extends AppCompatActivity {
+    private static final String TAG = "DataScreen";
 
     private Handler handler;
     private Context mContext;
+
+    public void showLogScreen(View view) {
+        Intent takeToLogPage = new Intent(getApplicationContext(), ViewLogScreen.class);
+        switch (view.getId()) {
+
+            case R.id.heart_card:
+                Log.d(TAG, "showLogScreen: heart");
+                takeToLogPage.putExtra("datatype", DataTypes.heart.toString());
+
+                startActivity(takeToLogPage);
+                break;
+            case R.id.temp_card:
+                Log.d(TAG, "showLogScreen: temp");
+                takeToLogPage.putExtra("datatype", DataTypes.temperature.toString());
+                startActivity(takeToLogPage);
+                break;
+            case R.id.oxygen_card:
+                Log.d(TAG, "showLogScreen: oxygen");
+                takeToLogPage.putExtra("datatype", DataTypes.oxygen.toString());
+                startActivity(takeToLogPage);
+                break;
+            case R.id.humidity_card:
+                Log.d(TAG, "showLogScreen: humidity");
+                takeToLogPage.putExtra("datatype", DataTypes.humidity.toString());
+                startActivity(takeToLogPage);
+                break;
+            default:
+                break;
+        }
+
+
+    }
 
 
 //    double temperature = 0;
@@ -97,7 +131,7 @@ public class DataScreen extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BluetoothService currentService = BluetoothService.getInstance(this, handler);
-        currentService.closeAll();
+//        BluetoothService currentService = BluetoothService.getInstance(this, handler);
+//        currentService.closeAll();
     }
 }

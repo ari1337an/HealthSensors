@@ -23,10 +23,10 @@ public class Utils {
         storeData(heart, context, DataTypes.heart);
     }
 
-    public static void storeData(double value, Context context, DataTypes dataTypes){
+    public static void storeData(double value, Context context, DataTypes dataType){
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(dataTypes+".txt", Context.MODE_APPEND));
-            outputStreamWriter.append(String.valueOf(LocalDateTime.now())).append(" : ").append(String.valueOf(value)).append("\n");
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(dataType+".txt", Context.MODE_APPEND));
+            outputStreamWriter.append(String.valueOf(LocalDateTime.now())).append(" => ").append(String.valueOf(value)).append("\n");
             outputStreamWriter.close();
         }
         catch (IOException e) {
@@ -36,11 +36,11 @@ public class Utils {
 
 
 
-    public static String readData(Context context, DataTypes dataTypes){
+    public static String readData(Context context, String dataType){
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput(dataTypes + ".txt");
+            InputStream inputStream = context.openFileInput(dataType + ".txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

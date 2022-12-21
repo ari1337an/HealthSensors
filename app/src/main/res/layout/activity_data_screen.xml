@@ -31,6 +31,7 @@
 
             <!--            Data Cards-->
             <soup.neumorphism.NeumorphCardView
+                android:onClick="showLogScreen"
                 android:id="@+id/temp_card"
                 style="@style/Widget.Neumorph.CardView"
                 android:layout_width="match_parent"
@@ -90,6 +91,7 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/humidity_card"
+                android:onClick="showLogScreen"
                 style="@style/Widget.Neumorph.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,6 +166,7 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/oxygen_card"
+                android:onClick="showLogScreen"
                 style="@style/Widget.Neumorph.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,6 +253,7 @@
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/heart_card"
+                android:onClick="showLogScreen"
                 style="@style/Widget.Neumorph.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
