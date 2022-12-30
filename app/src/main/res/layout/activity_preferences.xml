@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
     android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item1indexVal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Preferences"
-        >
+        tools:context=".Preferences">
 
         <EditText
             android:id="@+id/startingCharInput"
@@ -64,127 +64,126 @@
             app:layout_constraintTop_toBottomOf="@+id/item3SufText" />
 
         <TextView
-        android:id="@+id/item1SufText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:text="Item1 Suf"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item1DescText" />
+            android:id="@+id/item1SufText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:text="Item1 Suf"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item1DescText" />
 
         <EditText
-        android:id="@+id/item1SufInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:ems="12"
-        android:hint="Item1 Number Suffix"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/item1NameText"
-        app:layout_constraintTop_toBottomOf="@+id/item1DescInput" />
+            android:id="@+id/item1SufInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="Item1 Number Suffix"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item1DescInput" />
 
         <TextView
-        android:id="@+id/item1DescText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="47dp"
-        android:text="Item1 Desc"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item1NameText" />
+            android:id="@+id/item1DescText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="47dp"
+            android:text="Item1 Desc"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item1NameText" />
 
         <EditText
-        android:id="@+id/item1DescInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:ems="12"
-        android:hint="Item1 Description"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/item1NameText"
-        app:layout_constraintTop_toBottomOf="@+id/item1NameInput" />
+            android:id="@+id/item1DescInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="Item1 Description"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item1NameInput" />
 
         <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="@string/item1_index"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/item1_index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
 
-    <Spinner
-        android:id="@+id/item1Index2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:autofillHints="Item1 index"
-        android:elevation="2dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item1IndexText"
-        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
-
-    <TextView
-        android:id="@+id/item1NameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/item1_name"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item1IndexText" />
+        <Spinner
+            android:id="@+id/item1Index2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="Item1 index"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+            app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
 
         <TextView
-        android:id="@+id/preferenceTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/preferences"
-        android:textAlignment="center"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/item1NameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/item1_name"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item1IndexText" />
 
-    <TextView
-        android:id="@+id/item1IndexText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="@string/item1_index"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+        <TextView
+            android:id="@+id/preferenceTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="@string/preferences"
+            android:textAlignment="center"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/item1IndexDropdown"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:minHeight="48dp"
-        android:elevation="2dp"
-        android:autofillHints="Item1 index"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item1IndexText"
-        app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+        <TextView
+            android:id="@+id/item1IndexText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/item1_index"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
+
+        <Spinner
+            android:id="@+id/item1IndexDropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints="Item1 index"
+            android:elevation="2dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item1IndexText"
+            app:layout_constraintTop_toBottomOf="@+id/preferenceTitle" />
 
         <Spinner
             android:id="@+id/item2IndexDropdown"
@@ -444,16 +443,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item1SufText" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/item2IndexText2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:layout_marginTop="50dp"-->
-<!--            android:text="Item2 Index"-->
-<!--            android:textSize="15sp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/item2IndexText2"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="20dp"-->
+        <!--            android:layout_marginTop="50dp"-->
+        <!--            android:text="Item2 Index"-->
+        <!--            android:textSize="15sp"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />-->
 
         <EditText
             android:id="@+id/item2DescInput"
@@ -495,37 +494,37 @@
             app:layout_constraintTop_toBottomOf="@+id/item4NameInput" />
 
         <EditText
-        android:id="@+id/item1NameInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:ems="12"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:hint="Item1 Name"
-        app:layout_constraintStart_toEndOf="@+id/item1NameText"
-        app:layout_constraintTop_toBottomOf="@+id/item1IndexDropdown"/>
+            android:id="@+id/item1NameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="Item1 Name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item1IndexDropdown" />
 
-        <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Save"
-        android:onClick="savePreference"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            style="@style/Widget.Neumorph.Button"
+            android:onClick="savePreference"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Reset"
+            android:layout_margin="10dp"
             android:onClick="resetSharedPref"
+            style="@style/Widget.Neumorph.Button"
+            android:text="Reset"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

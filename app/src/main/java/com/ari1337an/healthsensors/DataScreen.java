@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class DataScreen extends AppCompatActivity {
@@ -81,6 +82,7 @@ public class DataScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DecimalFormat df = new DecimalFormat("#.#");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_screen);
 
@@ -157,14 +159,31 @@ public class DataScreen extends AppCompatActivity {
                                 TextView oxygen_suff = findViewById(R.id.oxygen_suff);
                                 TextView pulse_suff = findViewById(R.id.pulse_suff);
 
+                                double value1 = Double.parseDouble(item1Val);
+                                double value2 = Double.parseDouble(item2Val);
+                                double value3 = Double.parseDouble(item3Val);
+                                double value4 = Double.parseDouble(item4Val);
+                                value1 = Double.parseDouble(df.format(value1));
+                                value2 = Double.parseDouble(df.format(value2));
+                                value3 = Double.parseDouble(df.format(value3));
+                                value4 = Double.parseDouble(df.format(value4));
+
+                                Log.d(TAG, "handleMessage: " + value1 + " " + value2 + " " + value3 + " " + value4);
+
                                 humid_suff.setText(suffixOfItem2);
                                 oxygen_suff.setText(suffixOfItem3);
                                 pulse_suff.setText(suffixOfItem4);
 
-                                tempVal.setText((item1Val) + suffixOfItem1);
-                                humidVal.setText((item2Val)  + "");
-                                oxyVal.setText((item3Val)  + "");
-                                heartVal.setText((item4Val)  + "");
+//                                tempVal.setText((item1Val) + suffixOfItem1);
+//                                humidVal.setText((item2Val)  + "");
+//                                oxyVal.setText((item3Val)  + "");
+//                                heartVal.setText((item4Val)  + "");
+//
+                                tempVal.setText((value1) + suffixOfItem1);
+                                humidVal.setText((value2)  + "");
+                                oxyVal.setText((value3)  + "");
+                                heartVal.setText((value4)  + "");
+
                             }else{
                                 Toast.makeText(mContext, "NAN Value!", Toast.LENGTH_SHORT).show();
                             }
