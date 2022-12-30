@@ -38,6 +38,9 @@ public class Preferences extends AppCompatActivity {
     EditText item4DescE;
     EditText item4SufInput;
 
+    EditText startingChar;
+    EditText endingChar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +85,9 @@ public class Preferences extends AppCompatActivity {
         item4NameE = findViewById(R.id.item4NameInput);
         item4DescE = findViewById(R.id.item4DescInput);
         item4SufInput = findViewById(R.id.item4SufInput);
+
+        startingChar = findViewById(R.id.startingCharInput);
+        endingChar = findViewById(R.id.endingCharInput);
     }
 
     private void loadValueToUI() {
@@ -104,6 +110,9 @@ public class Preferences extends AppCompatActivity {
         item4NameE.setText(settings.getItem4Name());
         item4DescE.setText(settings.getItem4Desc());
         item4SufInput.setText(settings.getItem4Suf());
+
+        startingChar.setText(settings.getStartingChar());
+        endingChar.setText(settings.getEndingChar());
     }
 
     public void resetSharedPref(View view){
@@ -139,15 +148,24 @@ public class Preferences extends AppCompatActivity {
         editor.putString(UserSettings.ITEM4_DESC, String.valueOf(item4DescE.getText()));
         editor.putString(UserSettings.ITEM4_SUF, String.valueOf(item4SufInput.getText()));
 
-        // Universal
-        editor.apply();
+        if(!(startingChar.getText().length() == 1 && endingChar.getText().length() == 1)) {
+            Toast.makeText(settings, "Starting/Ending Character Length Must Be 1 and Non Empty!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            editor.putString(UserSettings.STARTING_CHAR, String.valueOf(startingChar.getText()));
+            editor.putString(UserSettings.ENDING_CHAR, String.valueOf(endingChar.getText()));
 
-        // Reload the data
-        settings.loadAllSharedPreferences();
+            // Universal
+            editor.apply();
 
-        Toast.makeText(settings, "Saved Preferences!", Toast.LENGTH_SHORT).show();
-        // Finish the Activity
-        finish();
+            // Reload the data
+            settings.loadAllSharedPreferences();
+
+            Toast.makeText(settings, "Saved Preferences!", Toast.LENGTH_SHORT).show();
+            // Finish the Activity
+            finish();
+        }
+
     }
 
     private void populateDropDown(Spinner dropdown) {

@@ -26,6 +26,7 @@ public class BluetoothService {
     private final BluetoothAdapter mBluetoothAdapter;
     private final Handler mHandler;
     private final Context mContext;
+    private UserSettings mSettings;
     private int mState;
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
@@ -68,18 +69,19 @@ public class BluetoothService {
         r.write(out);
     }
 
-    private BluetoothService(Context context, Handler handler){
+    private BluetoothService(Context context, Handler handler, UserSettings settings){
         mHandler = handler;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mContext = context;
+        mSettings = settings;
         mState = STATE_NOT_CONNECTED;
     }
 
-    public static BluetoothService getInstance(Context context, Handler handler){
+    public static BluetoothService getInstance(Context context, Handler handler, UserSettings settings){
         if(INSTANCE == null){
             synchronized (BluetoothService.class){
                 if(INSTANCE == null){
-                    INSTANCE = new BluetoothService(context, handler);
+                    INSTANCE = new BluetoothService(context, handler, settings);
                 }
             }
         }
@@ -182,9 +184,9 @@ public class BluetoothService {
             mmBuffer = new byte[1024];
             int numBytes; // bytes returned from read()
 
-            String data = "Connected from HealthSensor App!";
-            byte[] dataB = data.getBytes();
-            write(dataB);
+//            String data = "Connected from HealthSensor App!";
+//            byte[] dataB = data.getBytes();
+//            write(dataB);
 
             String line = "";
 
@@ -195,20 +197,20 @@ public class BluetoothService {
                     byte[] byteGot = Arrays.copyOf(mmBuffer, numBytes);
                     String stringGot = new String(byteGot, StandardCharsets.UTF_8);
 
-                    char starting = '$';
-                    char ending = ';';
+                    char starting = mSettings.getStartingChar().charAt(0);
+                    char ending = mSettings.getEndingChar().charAt(0);
 
                     for (int i = 0; i < stringGot.length(); i++) {
                         // process each character
                         if(stringGot.charAt(i) == starting){ // starting
-                            line = "$";
+                            line = ""+starting;
                         }else if(stringGot.charAt(i) == ending){ // ending
                             // send data to target
                             if(line.charAt(0) == starting){
                                 Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
                                 readMsg.sendToTarget();
                             }
-                            Log.d("CSE323", "received: "+line+ending);
+                            Log.d("CSE323", "ConnectedThread: "+line+ending);
                             line = "";
                         }else{ // data
                             line = line + stringGot.charAt(i);

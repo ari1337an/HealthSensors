@@ -21,7 +21,8 @@ public class DataViewActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BluetoothService currentService = BluetoothService.getInstance(this, new Handler());
+        UserSettings uset = (UserSettings) getApplication();
+        BluetoothService currentService = BluetoothService.getInstance(this, new Handler(), uset );
         currentService.closeAll();
     }
 }

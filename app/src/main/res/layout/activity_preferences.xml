@@ -14,11 +14,38 @@
         tools:context=".Preferences"
         >
 
+        <EditText
+            android:id="@+id/startingCharInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="Data Starting Character"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/item4SufInput" />
+
+        <EditText
+            android:id="@+id/endingCharInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="Data Ending Character"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toEndOf="@+id/item1NameText"
+            app:layout_constraintTop_toBottomOf="@+id/startingCharInput" />
+
+
         <TextView
             android:id="@+id/item3IndexText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
             android:text="Item3 Index"
             android:textSize="15sp"
@@ -53,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:ems="13"
+        android:ems="12"
         android:hint="Item1 Number Suffix"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -77,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:ems="13"
+        android:ems="12"
         android:hint="Item1 Description"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -207,7 +234,7 @@
             android:id="@+id/item2SufText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="47dp"
             android:text="Item2 Suf"
             android:textSize="15sp"
@@ -226,10 +253,35 @@
             app:layout_constraintTop_toBottomOf="@+id/item3DescText" />
 
         <TextView
-            android:id="@+id/item4SufText"
+            android:id="@+id/startingCharText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="45dp"
+            android:text="Starting Char"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item4SufText2" />
+
+        <TextView
+            android:id="@+id/endingCharText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="45dp"
+            android:text="Ending Char"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startingCharText" />
+
+
+        <TextView
+            android:id="@+id/item4SufText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
             android:text="Item4 Suf"
             android:textSize="15sp"
@@ -242,7 +294,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item2 Number Suffix"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -255,7 +307,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item3 Number Suffix"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -269,7 +321,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="100dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item4 Number Suffix"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -282,7 +334,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item2 Name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -295,7 +347,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item3 Name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -308,7 +360,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item4 Name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -319,7 +371,7 @@
             android:id="@+id/item2DescText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:text="Item2 Desc"
             android:textSize="15sp"
@@ -341,7 +393,7 @@
             android:id="@+id/item4DescText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
             android:text="Item4 Desc"
             android:textSize="15sp"
@@ -352,7 +404,7 @@
             android:id="@+id/item2NameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:text="Item2 Name"
             android:textSize="15sp"
@@ -363,7 +415,7 @@
             android:id="@+id/item3NameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:text="Item3 Name"
             android:textSize="15sp"
@@ -385,23 +437,23 @@
             android:id="@+id/item2IndexText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:text="Item2 Index"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item1SufText" />
 
-        <TextView
-            android:id="@+id/item2IndexText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="50dp"
-            android:text="Item2 Index"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />
+<!--        <TextView-->
+<!--            android:id="@+id/item2IndexText2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:text="Item2 Index"-->
+<!--            android:textSize="15sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/item1SufText" />-->
 
         <EditText
             android:id="@+id/item2DescInput"
@@ -409,7 +461,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item2 Description"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -422,7 +474,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item3 Description"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -435,7 +487,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
-            android:ems="13"
+            android:ems="12"
             android:hint="Item4 Description"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -448,7 +500,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:ems="13"
+        android:ems="12"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:hint="Item1 Name"

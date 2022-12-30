@@ -121,6 +121,7 @@ public class DataScreen extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 if (msg.what == MessageConstants.MESSAGE_READ) {
                     try {
+                        Log.d("CSE323", "UIThread: "+msg.obj);
                         String[] splitted = String.valueOf(msg.obj).split(" ");
 
                         int indexOfItem1 = Integer.parseInt(settings.getItem1Index());
@@ -138,8 +139,7 @@ public class DataScreen extends AppCompatActivity {
                         String item3Val = splitted[indexOfItem3];
                         String item4Val = splitted[indexOfItem4];
 
-                        // Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
-                        // Utils.readData(getApplicationContext());
+                         Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
 
                         int x1 = Integer.parseInt(settings.getItem1Index());
                         int x2 = Integer.parseInt(settings.getItem2Index());
@@ -193,14 +193,14 @@ public class DataScreen extends AppCompatActivity {
         BluetoothDevice d = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(macAddress);
 
         // start connection
-        BluetoothService bluetoothService = BluetoothService.getInstance(this, handler);
+        BluetoothService bluetoothService = BluetoothService.getInstance(this, handler, settings);
         bluetoothService.connect(d);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        BluetoothService currentService = BluetoothService.getInstance(this, handler);
+        BluetoothService currentService = BluetoothService.getInstance(this, handler, settings);
         currentService.closeAll();
 
 

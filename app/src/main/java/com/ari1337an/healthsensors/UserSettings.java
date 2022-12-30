@@ -27,6 +27,9 @@ public class UserSettings extends Application {
     public static final String ITEM4_DESC = "item4Desc";
     public static final String ITEM4_SUF = "item4Suf";
 
+    public static final String STARTING_CHAR = "$";
+    public static final String ENDING_CHAR = ";";
+
     // FIELDS
     private String item1Index;
     private String item1Name;
@@ -47,6 +50,40 @@ public class UserSettings extends Application {
     private String item4Name;
     private String item4Desc;
     private String item4Suf;
+
+    private String startingChar;
+    private String endingChar;
+
+    void loadAllSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(UserSettings.PREFERENCES, MODE_PRIVATE);
+
+        this.setItem1Index(sharedPreferences.getString(UserSettings.ITEM1_INDEX, String.valueOf(7)));
+        this.setItem1Name(sharedPreferences.getString(UserSettings.ITEM1_NAME, "Temperature"));
+        this.setItem1Desc(sharedPreferences.getString(UserSettings.ITEM1_DESC, "Get to know your temperature around you!"));
+        this.setItem1Suf(sharedPreferences.getString(UserSettings.ITEM1_SUF, "°")); // degree sign
+
+        this.setItem2Index(sharedPreferences.getString(UserSettings.ITEM2_INDEX, String.valueOf(5)));
+        this.setItem2Name(sharedPreferences.getString(UserSettings.ITEM2_NAME, "Humidity"));
+        this.setItem2Desc(sharedPreferences.getString(UserSettings.ITEM2_DESC, "Get to know humidity around you!"));
+        this.setItem2Suf(sharedPreferences.getString(UserSettings.ITEM2_SUF, "%")); // degree sign
+
+        this.setItem3Index(sharedPreferences.getString(UserSettings.ITEM3_INDEX, String.valueOf(3)));
+        this.setItem3Name(sharedPreferences.getString(UserSettings.ITEM3_NAME, "Sp02"));
+        this.setItem3Desc(sharedPreferences.getString(UserSettings.ITEM3_DESC, "Get to know your Sp02!"));
+        this.setItem3Suf(sharedPreferences.getString(UserSettings.ITEM3_SUF, "%")); // degree sign
+
+        this.setItem4Index(sharedPreferences.getString(UserSettings.ITEM4_INDEX, String.valueOf(1)));
+        this.setItem4Name(sharedPreferences.getString(UserSettings.ITEM4_NAME, "Pulse"));
+        this.setItem4Desc(sharedPreferences.getString(UserSettings.ITEM4_DESC, "Get to know your pulse!"));
+        this.setItem4Suf(sharedPreferences.getString(UserSettings.ITEM4_SUF, "bpm")); // degree sign
+
+        this.setStartingChar(sharedPreferences.getString(UserSettings.STARTING_CHAR, "$"));
+        this.setEndingChar(sharedPreferences.getString(UserSettings.ENDING_CHAR, ";"));
+    }
+
+    public String getStartingChar() { return startingChar; }
+
+    public void setStartingChar(String startingChar) { this.startingChar = startingChar; }
 
     public String getItem2Index() {
         return item2Index;
@@ -152,30 +189,6 @@ public class UserSettings extends Application {
         this.item1Suf = item1Suf;
     }
 
-    void loadAllSharedPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences(UserSettings.PREFERENCES, MODE_PRIVATE);
-
-        this.setItem1Index(sharedPreferences.getString(UserSettings.ITEM1_INDEX, String.valueOf(7)));
-        this.setItem1Name(sharedPreferences.getString(UserSettings.ITEM1_NAME, "Temperature"));
-        this.setItem1Desc(sharedPreferences.getString(UserSettings.ITEM1_DESC, "Get to know your temperature around you!"));
-        this.setItem1Suf(sharedPreferences.getString(UserSettings.ITEM1_SUF, "°")); // degree sign
-
-        this.setItem2Index(sharedPreferences.getString(UserSettings.ITEM2_INDEX, String.valueOf(5)));
-        this.setItem2Name(sharedPreferences.getString(UserSettings.ITEM2_NAME, "Humidity"));
-        this.setItem2Desc(sharedPreferences.getString(UserSettings.ITEM2_DESC, "Get to know humidity around you!"));
-        this.setItem2Suf(sharedPreferences.getString(UserSettings.ITEM2_SUF, "%")); // degree sign
-
-        this.setItem3Index(sharedPreferences.getString(UserSettings.ITEM3_INDEX, String.valueOf(3)));
-        this.setItem3Name(sharedPreferences.getString(UserSettings.ITEM3_NAME, "Sp02"));
-        this.setItem3Desc(sharedPreferences.getString(UserSettings.ITEM3_DESC, "Get to know your Sp02!"));
-        this.setItem3Suf(sharedPreferences.getString(UserSettings.ITEM3_SUF, "%")); // degree sign
-
-        this.setItem4Index(sharedPreferences.getString(UserSettings.ITEM4_INDEX, String.valueOf(1)));
-        this.setItem4Name(sharedPreferences.getString(UserSettings.ITEM4_NAME, "Pulse"));
-        this.setItem4Desc(sharedPreferences.getString(UserSettings.ITEM4_DESC, "Get to know your pulse!"));
-        this.setItem4Suf(sharedPreferences.getString(UserSettings.ITEM4_SUF, "bpm")); // degree sign
-    }
-
     public String getItem1Desc() {
         return item1Desc;
     }
@@ -200,4 +213,7 @@ public class UserSettings extends Application {
         this.item1Index = item1Index;
     }
 
+    public String getEndingChar() { return endingChar; }
+
+    public void setEndingChar(String endingChar) { this.endingChar = endingChar; }
 }

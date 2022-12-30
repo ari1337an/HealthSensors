@@ -28,6 +28,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DeviceListActivity extends AppCompatActivity implements ItemsClicked {
 
@@ -72,7 +74,10 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
     }
 
     private void updateTheList(){
-        deviceListRV.setAdapter(new DeviceListRVAdapter(foundDevices, this));
+        Set<BluetoothDevice> foundDevicesUnique = new HashSet<>(foundDevices);
+        ArrayList<BluetoothDevice> foundDevicesAL = new ArrayList<>(foundDevicesUnique);
+
+        deviceListRV.setAdapter(new DeviceListRVAdapter(foundDevicesAL, this));
         deviceListRV.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
