@@ -196,16 +196,53 @@ public class BluetoothService {
                     numBytes = mmInStream.read(mmBuffer);
                     byte[] byteGot = Arrays.copyOf(mmBuffer, numBytes);
                     String stringGot = new String(byteGot, StandardCharsets.UTF_8);
-                    if(stringGot.charAt(0) == 'C'){
-                        String[] words = line.split(" ");
-                        if(words.length == 8){ // check that the input stream we got was not partial
-                            Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
-                            readMsg.sendToTarget();
+//                    if(stringGot.charAt(0) == 'C'){
+//                        String[] words = line.split(" ");
+//                        if(words.length == 8){ // check that the input stream we got was not partial
+//                            Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
+//                            readMsg.sendToTarget();
+//                        }
+//                        line = "";
+//                    }else{
+//                        line = line + stringGot;
+//                    }
+//                    Log.d("CSE323", stringGot);
+
+
+
+                        int hasDollar = stringGot.indexOf("$",0);
+                        int hasSemicolon = stringGot.indexOf(";",0);
+
+                        if(hasDollar >= 0 && hasSemicolon >= 0 && hasDollar < hasSemicolon) {
+                            // contains both
+                            line = stringGot.substring(hasDollar,hasSemicolon);
+                            String[] words = line.split(" ");
+                            if(words.length == 8){ // check that the input stream we got was not partial
+                                Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
+                                readMsg.sendToTarget();
+                            }
+                            line = "";
+                        }else if(hasDollar >= 0){
+                            // has a dollar sign // starting
+                            line = stringGot.substring(hasDollar);
+                        }else if(hasSemicolon >= 0){
+                            line = line + stringGot.substring(0, hasSemicolon);
+                            // process end of line
+                            String[] words = line.split(" ");
+                            if(words.length == 8){ // check that the input stream we got was not partial
+                                Message readMsg = mHandler.obtainMessage(MessageConstants.MESSAGE_READ, line);
+                                readMsg.sendToTarget();
+                            }
+                            Log.d("CSE323", line);
+                            if(hasSemicolon+1 < stringGot.length())line = stringGot.substring(hasSemicolon+1);
+                            else line = "";
+                        }else {
+                            line = line + stringGot;
                         }
-                        line = "";
-                    }else{
-                        line = line + stringGot;
-                    }
+
+
+
+
                 } catch (IOException e) {
                     Message readMsg = mHandler.obtainMessage(MessageConstants.DISCONNECTED, 1);
                     readMsg.sendToTarget();

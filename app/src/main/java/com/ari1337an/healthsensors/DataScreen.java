@@ -133,12 +133,12 @@ public class DataScreen extends AppCompatActivity {
                     int indexOfItem4 = Integer.parseInt(settings.getItem4Index());
                     String suffixOfItem4 = settings.getItem4Suf();
 
-                    double item1Val = (Double.parseDouble(splitted[indexOfItem1]));
-                    double item2Val = (Double.parseDouble(splitted[indexOfItem2]));
-                    double item3Val = (Double.parseDouble(splitted[indexOfItem3]));
-                    double item4Val = (Double.parseDouble(splitted[indexOfItem4]));
+                    String item1Val = splitted[indexOfItem1];
+                    String item2Val = splitted[indexOfItem2];
+                    String item3Val = splitted[indexOfItem3];
+                    String item4Val = splitted[indexOfItem4];
 
-                    Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
+//                    Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
 //                    Utils.readData(getApplicationContext());
 
                     TextView oxygen_suff = findViewById(R.id.oxygen_suff);
@@ -150,10 +150,17 @@ public class DataScreen extends AppCompatActivity {
                     TextView pulse_suff = findViewById(R.id.pulse_suff);
                     pulse_suff.setText(suffixOfItem4);
 
-                    tempVal.setText(Math.round(item1Val) + suffixOfItem1);
-                    humidVal.setText(Math.round(item2Val)  + "");
-                    oxyVal.setText(Math.round(item3Val)  + "");
-                    heartVal.setText(Math.round(item4Val)  + "");
+//                    tempVal.setText(Math.round(item1Val) + suffixOfItem1);
+//                    humidVal.setText(Math.round(item2Val)  + "");
+//                    oxyVal.setText(Math.round(item3Val)  + "");
+//                    heartVal.setText(Math.round(item4Val)  + "");
+
+                    if(!(item1Val == "NAN" || item2Val == "NAN" || item3Val == "NAN" || item4Val == "NAN")){
+                        tempVal.setText((item1Val) + suffixOfItem1);
+                        humidVal.setText((item2Val)  + "");
+                        oxyVal.setText((item3Val)  + "");
+                        heartVal.setText((item4Val)  + "");
+                    }
 
                 } else if (msg.what == MessageConstants.CONNECTED) {
                     Toast.makeText(mContext, "Connected to Device", Toast.LENGTH_SHORT).show();
