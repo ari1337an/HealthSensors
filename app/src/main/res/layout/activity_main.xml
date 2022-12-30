@@ -62,7 +62,7 @@
         android:onClick="prefrencesBtnClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/connectBtn" />
+        app:layout_constraintTop_toBottomOf="@id/connectedBtn" />
 
     <soup.neumorphism.NeumorphButton
         android:id="@+id/connectBtn"
@@ -77,6 +77,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/connectedBtn"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="Connected Devices"
+        android:onClick="connectedBtnClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connectBtn" />
+
     <!--    <LinearLayout-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content"-->

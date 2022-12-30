@@ -1,7 +1,5 @@
 package com.ari1337an.healthsensors;
 
-import static com.ari1337an.healthsensors.DeviceListActivity.CONNECTING_STATUS;
-
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;

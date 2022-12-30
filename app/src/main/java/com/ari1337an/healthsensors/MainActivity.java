@@ -157,4 +157,9 @@ public class MainActivity extends AppCompatActivity {
         Intent takeToPreferences = (Intent) new Intent(this, Preferences.class);
         startActivity(takeToPreferences);
     }
+
+    public void connectedBtnClick(View view) {
+        Intent takeToConnected = (Intent) new Intent(this, ConnectedDeviceList.class);
+        startActivity(takeToConnected);
+    }
 }

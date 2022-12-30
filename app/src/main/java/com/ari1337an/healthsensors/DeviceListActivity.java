@@ -22,9 +22,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -40,12 +37,7 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
     ArrayList<BluetoothDevice> foundDevices = new ArrayList<>();
     ProgressBar loaderDiscovery;
     Context mContext;
-    public static Handler handler;
     private final int REQUEST_PERMISSION_ACCESS_FINE_LOCATION = 255;
-
-    final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
-    private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
-
 
     @SuppressLint("MissingPermission")
     @Override
@@ -96,23 +88,6 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
                 loaderDiscovery.setVisibility(View.GONE);
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-//                // Get the Data
-//                @SuppressLint("MissingPermission") String deviceName = device.getName();
-//                String deviceHardwareAddress = device.getAddress(); // MAC address
-//
-//                if(deviceName == null) return;
-//
-//                // Notify the User
-//                Toast.makeText(context, "Found a device nearby! " + deviceName, Toast.LENGTH_SHORT).show();
-//
-//                // Parse the Data
-//                Device newDevice = new Device();
-//                newDevice.devicename = deviceName;
-//                newDevice.macaddress = deviceHardwareAddress;
-
-                // Add to List
-//                foundDevices.add(newDevice);
                 foundDevices.add(device);
             }
         }
@@ -131,10 +106,6 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
         filter.addAction(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
 
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH}, 1);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_ADMIN}, 2);
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, 3);
-
         // Activity Context
         mContext = this;
 
@@ -148,41 +119,6 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
         // Initialize the Bluetooth adapter.
         bluetoothManager = getSystemService(BluetoothManager.class);
         bluetoothAdapter = bluetoothManager.getAdapter();
-
-
-        handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg){
-                switch (msg.what){
-                    case CONNECTING_STATUS:
-                        switch(msg.arg1){
-                            case 1:
-                                Toast.makeText(mContext, "Connected", Toast.LENGTH_SHORT).show();
-//                                Intent takeToConnectedPage = new Intent(mContext, DataScreen.class);
-//                                startActivity(takeToConnectedPage);
-                                break;
-                            case -1:
-                                Toast.makeText(mContext, "Socket is not open on that device!", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                        break;
-
-                    case MESSAGE_READ:
-                        String arduinoMsg = msg.obj.toString(); // Read message from Arduino
-                        switch (arduinoMsg.toLowerCase()){
-                            case "led is turned on":
-                                Log.d("CSE323", "msg3");
-                                break;
-                            case "led is turned off":
-                                Log.d("CSE323", "msg4");
-                                break;
-                        }
-                        break;
-                }
-            }
-        };
-
-
 
         if (bluetoothAdapter == null) {
             // Device doesn't support Bluetooth
@@ -224,15 +160,9 @@ public class DeviceListActivity extends AppCompatActivity implements ItemsClicke
     @Override
     public void onClickedItem(BluetoothDevice d) {
         Log.d("CSE323", "clicked on: " + d.getAddress());
-
-        // Create a bluetooth service to connect
-
         Intent takeToConnectedPage = new Intent(mContext, DataScreen.class);
         takeToConnectedPage.putExtra("macaddress", d.getAddress());
         startActivity(takeToConnectedPage);
-
-//        BluetoothService bluetoothService = BluetoothService.getInstance(this, handler);
-//        bluetoothService.connect(d);
     }
 
     @Override

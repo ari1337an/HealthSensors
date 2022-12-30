@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
+
 public class DataScreen extends AppCompatActivity {
     private static final String TAG = "DataScreen";
     private UserSettings settings;
@@ -155,7 +157,7 @@ public class DataScreen extends AppCompatActivity {
 //                    oxyVal.setText(Math.round(item3Val)  + "");
 //                    heartVal.setText(Math.round(item4Val)  + "");
 
-                    if(!(item1Val == "NAN" || item2Val == "NAN" || item3Val == "NAN" || item4Val == "NAN")){
+                    if(!(Objects.equals(item1Val, "NAN") || Objects.equals(item2Val, "NAN") || Objects.equals(item3Val, "NAN") || Objects.equals(item4Val, "NAN"))){
                         tempVal.setText((item1Val) + suffixOfItem1);
                         humidVal.setText((item2Val)  + "");
                         oxyVal.setText((item3Val)  + "");
@@ -189,5 +191,12 @@ public class DataScreen extends AppCompatActivity {
         super.onBackPressed();
         BluetoothService currentService = BluetoothService.getInstance(this, handler);
         currentService.closeAll();
+
+
+        Intent i = new Intent(this,MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(i);
+        finish(); // to end the current activity
+
     }
 }

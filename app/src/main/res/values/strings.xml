@@ -19,4 +19,5 @@
     <string name="preferences">Preferences</string>
     <string name="item1_index">Item1 Index</string>
     <string name="item1_name">Item1 Name</string>
+    <string name="paired_devices">Paired Devices</string>
 </resources>
