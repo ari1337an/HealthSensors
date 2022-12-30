@@ -120,50 +120,61 @@ public class DataScreen extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == MessageConstants.MESSAGE_READ) {
-                    Log.d("CSE323", String.valueOf(msg.obj));
-                    String[] splitted = String.valueOf(msg.obj).split(" ");
+                    try {
+                        String[] splitted = String.valueOf(msg.obj).split(" ");
 
-                    int indexOfItem1 = Integer.parseInt(settings.getItem1Index());
-                    String suffixOfItem1 = settings.getItem1Suf();
+                        int indexOfItem1 = Integer.parseInt(settings.getItem1Index());
+                        int indexOfItem2 = Integer.parseInt(settings.getItem2Index());
+                        int indexOfItem3 = Integer.parseInt(settings.getItem3Index());
+                        int indexOfItem4 = Integer.parseInt(settings.getItem4Index());
 
-                    int indexOfItem2 = Integer.parseInt(settings.getItem2Index());
-                    String suffixOfItem2 = settings.getItem2Suf();
+                        String suffixOfItem1 = settings.getItem1Suf();
+                        String suffixOfItem2 = settings.getItem2Suf();
+                        String suffixOfItem3 = settings.getItem3Suf();
+                        String suffixOfItem4 = settings.getItem4Suf();
 
-                    int indexOfItem3 = Integer.parseInt(settings.getItem3Index());
-                    String suffixOfItem3 = settings.getItem3Suf();
+                        String item1Val = splitted[indexOfItem1];
+                        String item2Val = splitted[indexOfItem2];
+                        String item3Val = splitted[indexOfItem3];
+                        String item4Val = splitted[indexOfItem4];
 
-                    int indexOfItem4 = Integer.parseInt(settings.getItem4Index());
-                    String suffixOfItem4 = settings.getItem4Suf();
+                        // Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
+                        // Utils.readData(getApplicationContext());
 
-                    String item1Val = splitted[indexOfItem1];
-                    String item2Val = splitted[indexOfItem2];
-                    String item3Val = splitted[indexOfItem3];
-                    String item4Val = splitted[indexOfItem4];
+                        int x1 = Integer.parseInt(settings.getItem1Index());
+                        int x2 = Integer.parseInt(settings.getItem2Index());
+                        int x3 = Integer.parseInt(settings.getItem3Index());
+                        int x4 = Integer.parseInt(settings.getItem4Index());
 
-//                    Utils.storeAllData(item1Val, item2Val, item3Val, item4Val, getApplicationContext());
-//                    Utils.readData(getApplicationContext());
+                        int mx = x1;
+                        mx = Math.max(mx, x2);
+                        mx = Math.max(mx, x3);
+                        mx = Math.max(mx, x4);
 
-                    TextView oxygen_suff = findViewById(R.id.oxygen_suff);
-                    oxygen_suff.setText(suffixOfItem3);
+                        if(mx < splitted.length){
+                            if(!(Objects.equals(item1Val, "NAN") || Objects.equals(item2Val, "NAN") || Objects.equals(item3Val, "NAN") || Objects.equals(item4Val, "NAN"))){
+                                TextView humid_suff = findViewById(R.id.humid_suff);
+                                TextView oxygen_suff = findViewById(R.id.oxygen_suff);
+                                TextView pulse_suff = findViewById(R.id.pulse_suff);
 
-                    TextView humid_suff = findViewById(R.id.humid_suff);
-                    humid_suff.setText(suffixOfItem2);
+                                humid_suff.setText(suffixOfItem2);
+                                oxygen_suff.setText(suffixOfItem3);
+                                pulse_suff.setText(suffixOfItem4);
 
-                    TextView pulse_suff = findViewById(R.id.pulse_suff);
-                    pulse_suff.setText(suffixOfItem4);
-
-//                    tempVal.setText(Math.round(item1Val) + suffixOfItem1);
-//                    humidVal.setText(Math.round(item2Val)  + "");
-//                    oxyVal.setText(Math.round(item3Val)  + "");
-//                    heartVal.setText(Math.round(item4Val)  + "");
-
-                    if(!(Objects.equals(item1Val, "NAN") || Objects.equals(item2Val, "NAN") || Objects.equals(item3Val, "NAN") || Objects.equals(item4Val, "NAN"))){
-                        tempVal.setText((item1Val) + suffixOfItem1);
-                        humidVal.setText((item2Val)  + "");
-                        oxyVal.setText((item3Val)  + "");
-                        heartVal.setText((item4Val)  + "");
+                                tempVal.setText((item1Val) + suffixOfItem1);
+                                humidVal.setText((item2Val)  + "");
+                                oxyVal.setText((item3Val)  + "");
+                                heartVal.setText((item4Val)  + "");
+                            }else{
+                                Toast.makeText(mContext, "NAN Value!", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(mContext, "Settings Index Error!", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }catch (Exception e) {
+                        e.printStackTrace();
                     }
-
                 } else if (msg.what == MessageConstants.CONNECTED) {
                     Toast.makeText(mContext, "Connected to Device", Toast.LENGTH_SHORT).show();
                 } else if (msg.what == MessageConstants.CONNECTION_FAILED) {
